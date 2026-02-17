@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# URL Indexation Checker Dashboard
+
+A full-stack Next.js application to monitor Google Index status for a list of URLs.
+Features a responsive single-page dashboard, automated daily checks, and manual trigger capabilities.
+
+## Tech Stack
+- **Framework**: Next.js 14+
+- **Language**: TypeScript 
+- **Styling**:  TailwindCSS  +  DaisyUI 
+- **State Management**:  Zustand 
+- **Backend Utilities**:
+  - `node-cron`: For scheduling daily checks.
+  - `csv-parse` / `csv-writer`: For reading/writing local data.
+  - `dayjs`: For date handling.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+ installed.
 
+### Installation
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Running Locally
+Start the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Open http://localhost:3000  in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features & Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Automated Schedule
+The application includes a scheduler initialized on server start.
+- **Default Schedule**: Daily at **9:00 AM IST**.
+- **Configuration**:
+  - Modify `src/lib/scheduler.ts` to change the Cron expression.
+  - Current: `0 9 * * *` (9:00 AM) with timezone `Asia/Kolkata`.
 
-## Learn More
+### 2. Data Management
+- URLs are stored in `data/urls.csv`.
+- You can manually edit this file to add/remove URLs.
+- Ensure the CSV header matches: `URL,Status,Last Checked Date,Notes`.
 
-To learn more about Next.js, take a look at the following resources:
+## Implementation Details
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Index Checking Logic (`src/lib/urlChecker.ts`)
+Currently, the check is **simulated** for demonstration purposes:
+- Known major sites (Google, GitHub, etc.) return **Indexed**.
+- URLs containing "not-indexed", "fake", etc., return **Not Indexed**.
+- Random fallback logic is applied for other URLs.
+- **Note**: For real-world usage, integrate with Google Search Console API or a SERP scraping service here.
+ 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architecture
+- **Frontend**: Client-side React components using Zustand for global state.
+- **Backend**: Next.js API Routes (`/api/urls`, `/api/run-check`) handle data persistence and logic.
