@@ -28,7 +28,6 @@ export const runFullCheck = async (): Promise<UrlRecord[]> => {
     const currentUrls = await getUrlsFromCsv();
     const updatedRecords: UrlRecord[] = [];
 
-    // Run checks in parallel with a concurrency limit (optional, but good practice)
     // For 30 URLs, Promise.all is fine.
 
     const checkPromises = currentUrls.map(async (record) => {
