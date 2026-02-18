@@ -1,26 +1,26 @@
 URL,Status,Last Checked Date,Notes
-https://www.google.com,Indexed,2026-02-17T16:27:02.384Z,Verified via simulation
-https://www.example.com,Indexed,2026-02-17T16:27:02.068Z,Verified via simulation
-https://www.github.com,Indexed,2026-02-17T16:27:01.696Z,Verified via simulation
-https://www.stackoverflow.com,Indexed,2026-02-17T16:27:01.759Z,Verified via simulation
-https://www.wikipedia.org,Indexed,2026-02-17T16:27:01.759Z,Verified via simulation
-https://www.reddit.com,Indexed,2026-02-17T16:27:01.666Z,Verified via simulation
-https://www.linkedin.com,Indexed,2026-02-17T16:27:01.805Z,Verified via simulation
-https://www.microsoft.com,Indexed,2026-02-17T16:27:02.210Z,Verified via simulation
-https://www.apple.com,Indexed,2026-02-17T16:27:02.210Z,Verified via simulation
-https://www.amazon.com,Indexed,2026-02-17T16:27:02.241Z,Verified via simulation
-https://this-site-does-not-exist-123.com,Not Indexed,2026-02-17T16:27:01.897Z,Not found in index
-https://another-fake-site-abc.net,Not Indexed,2026-02-17T16:27:01.851Z,Not found in index
-https://testing-check-xyz.org,Not Indexed,2026-02-17T16:27:02.384Z,Not found in index
-https://my-local-test-site.dev,Not Indexed,2026-02-17T16:27:02.103Z,Not found in index
-https://hidden-page-456.com,Not Indexed,2026-02-17T16:27:01.712Z,Not found in index
-https://private-network-789.net,Not Indexed,2026-02-17T16:27:02.194Z,Not found in index
-https://not-indexed-example.io,Not Indexed,2026-02-17T16:27:01.759Z,Not found in index
-https://staging-env-check.com,Not Indexed,2026-02-17T16:27:01.666Z,Not found in index
-https://beta-release-test.com,Not Indexed,2026-02-17T16:27:01.666Z,Not found in index
-https://alpha-protocol-test.com,Not Indexed,2026-02-17T16:27:02.210Z,Not found in index
-invalid-url-format,Invalid,2026-02-17T16:27:01.836Z,Malformed URL
-ftp://unsupported-protocol.com,Invalid,2026-02-17T16:27:02.336Z,Unsupported protocol
-just-some-text,Invalid,2026-02-17T16:27:02.477Z,Malformed URL
-http://,Invalid,2026-02-17T16:27:01.866Z,Malformed URL
-www.missing-protocol.com,Invalid,2026-02-17T16:27:01.928Z,Malformed URL
+https://www.google.com,Invalid,2026-02-18T02:59:56.503Z,API or network error
+https://www.example.com,Invalid,2026-02-18T02:59:56.913Z,API or network error
+https://www.github.com,Invalid,2026-02-18T02:59:56.912Z,API or network error
+https://www.stackoverflow.com,Invalid,2026-02-18T02:59:56.909Z,API or network error
+https://www.wikipedia.org,Invalid,2026-02-18T02:59:56.848Z,API or network error
+https://www.reddit.com,Invalid,2026-02-18T02:59:56.900Z,API or network error
+https://www.linkedin.com,Invalid,2026-02-18T02:59:56.488Z,API or network error
+https://www.microsoft.com,Invalid,2026-02-18T02:59:56.913Z,API or network error
+https://www.apple.com,Invalid,2026-02-18T02:59:56.489Z,API or network error
+https://www.amazon.com,Invalid,2026-02-18T02:59:56.909Z,API or network error
+https://this-site-does-not-exist-123.com,Invalid,2026-02-18T02:59:56.913Z,API or network error
+https://another-fake-site-abc.net,Invalid,2026-02-18T02:59:56.506Z,API or network error
+https://testing-check-xyz.org,Invalid,2026-02-18T02:59:56.901Z,API or network error
+https://my-local-test-site.dev,Invalid,2026-02-18T02:59:56.901Z,API or network error
+https://hidden-page-456.com,Invalid,2026-02-18T02:59:56.901Z,API or network error
+https://private-network-789.net,Invalid,2026-02-18T02:59:56.497Z,API or network error
+https://not-indexed-example.io,Invalid,2026-02-18T02:59:56.914Z,API or network error
+https://staging-env-check.com,Invalid,2026-02-18T02:59:56.920Z,API or network error
+https://beta-release-test.com,Invalid,2026-02-18T02:59:56.499Z,API or network error
+https://alpha-protocol-test.com,Invalid,2026-02-18T02:59:56.501Z,API or network error
+invalid-url-format,Invalid,2026-02-18T02:59:56.110Z,Malformed URL
+ftp://unsupported-protocol.com,Invalid,2026-02-18T02:59:56.110Z,Unsupported protocol
+just-some-text,Invalid,2026-02-18T02:59:56.110Z,Malformed URL
+http://,Invalid,2026-02-18T02:59:56.110Z,Malformed URL
+www.missing-protocol.com,Invalid,2026-02-18T02:59:56.110Z,Malformed URL

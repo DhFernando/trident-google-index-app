@@ -1,43 +1,93 @@
-import { UrlRecord, CheckResult } from './types';
+import axios from "axios";
+import { CheckResult } from "./types";
 
 /**
- * Simulates checking if a URL is indexed by Google.
- * In a real-world scenario, this would use a SERP API or Google Search Console API.
- * For this demo, we simulate the check with random latency and logic based on the URL.
+ * Real Google index checker using Serper API.
+ * It searches Google using: site:URL
+ * If results found → Indexed
+ * If no results → Not Indexed
+ * Handles invalid URLs and API errors safely.
  */
+
 export const checkUrlIndexStatus = async (url: string): Promise<CheckResult> => {
-    // Simulate network delay (500ms - 1500ms)
-    const delay = Math.floor(Math.random() * 1000) + 500;
-    await new Promise((resolve) => setTimeout(resolve, delay));
+  try {
 
+    console.log('hellwo')
+    console.log(process.env.SERPER_API_KEY)
+    // Small delay to avoid hitting rate limits (important)
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+
+    // Validate URL format
+    let parsedUrl: URL;
     try {
-        const urlObj = new URL(url);
-
-        // Invalid protocol check
-        if (!['http:', 'https:'].includes(urlObj.protocol)) {
-            return { status: 'Invalid', notes: 'Unsupported protocol' };
-        }
-
-        // Simulation Logic:
-        // 1. Known big sites are always indexed
-        const knownSites = ['google.com', 'github.com', 'wikipedia.org', 'stackoverflow.com', 'reddit.com', 'microsoft.com', 'apple.com', 'amazon.com', 'linkedin.com', 'example.com'];
-        if (knownSites.some(site => url.includes(site))) {
-            return { status: 'Indexed', notes: 'Verified via simulation' };
-        }
-
-        // 2. Explicit "not-indexed" keywords for testing
-        if (url.includes('not-indexed') || url.includes('fake') || url.includes('test') || url.includes('staging') || url.includes('dev')) {
-            return { status: 'Not Indexed', notes: 'Not found in index' };
-        }
-
-        // 3. Random fallback for unknown URLs (80% chance of not indexed for random sites in this test context)
-        const isIndexed = Math.random() > 0.8;
-        return {
-            status: isIndexed ? 'Indexed' : 'Not Indexed',
-            notes: isIndexed ? 'Verified via simulation' : 'Not found in index'
-        };
-
-    } catch (error) {
-        return { status: 'Invalid', notes: 'Malformed URL' };
+      parsedUrl = new URL(url);
+    } catch {
+      return {
+        status: "Invalid",
+        notes: "Malformed URL",
+      };
     }
+
+    // Allow only http/https
+    if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+      return {
+        status: "Invalid",
+        notes: "Unsupported protocol",
+      };
+    }
+
+    // Call Serper API to search Google
+    const response = await axios.post(
+      "https://google.serper.dev/search",
+      {
+        q: `site:${url}`, // this checks if page exists in Google index
+      },
+      {
+        headers: {
+          "X-API-KEY": process.env.SERPER_API_KEY as string,
+          "Content-Type": "application/json",
+        },
+        timeout: 20000,
+      }
+    );
+
+    console.log(process.env.SERPER_API_KEY)
+
+    const organicResults = response.data?.organic || [];
+
+    // If Google returned results → indexed
+    if (organicResults.length > 0) {
+      return {
+        status: "Indexed",
+        notes: "Found in Google index",
+      };
+    }
+
+    // No results → not indexed
+    return {
+      status: "Not Indexed",
+      notes: "Not found in Google",
+    };
+  } catch (error: any) {
+    // API limit reached
+    if (error.response?.status === 429) {
+      return {
+        status: "Invalid",
+        notes: "API limit reached",
+      };
+    }
+
+    // Network/DNS error
+    if (error.code === "ENOTFOUND") {
+      return {
+        status: "Invalid",
+        notes: "Domain not found",
+      };
+    }
+
+    return {
+      status: "Invalid",
+      notes: "API or network error",
+    };
+  }
 };
