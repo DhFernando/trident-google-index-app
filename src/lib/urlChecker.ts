@@ -1,14 +1,7 @@
 import axios from "axios";
 import { CheckResult } from "./types";
 
-/**
- * Real Google index checker using Serper API.
- * It searches Google using: site:URL
- * If results found → Indexed
- * If no results → Not Indexed
- * Handles invalid URLs and API errors safely.
- */
-
+ 
 export const checkUrlIndexStatus = async (url: string): Promise<CheckResult> => {
   try {
 
