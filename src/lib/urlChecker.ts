@@ -4,10 +4,7 @@ import { CheckResult } from "./types";
  
 export const checkUrlIndexStatus = async (url: string): Promise<CheckResult> => {
   try {
-
-    console.log('hellwo')
-    console.log(process.env.SERPER_API_KEY)
-    // Small delay to avoid hitting rate limits (important)
+ 
     await new Promise((resolve) => setTimeout(resolve, 1200));
 
     // Validate URL format
